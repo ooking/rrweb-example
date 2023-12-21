@@ -1,12 +1,10 @@
-# rrweb
+# rrweb 录制回放例子
+
 官方文档：[rrweb/guide.zh_CN.md at master · rrweb-io/rrweb (github.com)](https://github.com/rrweb-io/rrweb/blob/master/guide.zh_CN.md)
 
 为了方便看效果，写了个rrweb的example
-通过在控制台执行下面代码 ，可以把录制任意的网页内容，只要把输出的json复制成文件然后改一下replay.html中的文件名即可看到效果。
 
-例子：
-
-录制
+录制方法，打开任意网站，然后在控制台输入以下代码后在网站上操作，20秒后就会输入json，把json复制出来存到文件中，然后改一下replay.html中的文件名即可看到效果。
 
 ```jsx
 let injectJs= (url) => {
@@ -37,37 +35,4 @@ timer = setInterval(()=>{
   events = [];
 }, time * 1000);
 
-```
-
-回放页面
-
-```jsx
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8" />
-  <title>Player Example</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js"></script>
-</head>
-<body>
-    <script>
-        var url = "./ql.events.json"
-        fetch(url, {cache: "no-cache"}).then(response => {
-            return response.json();
-        }).then(data => {
-            new rrwebPlayer({
-                target: document.body,                
-                props: {
-                    events: data.events,
-                    autoPlay: true,
-                    UNSAFE_replayCanvas: true
-                },
-            });
-        }).catch(err => {
-            console.log(err);
-        });
-    </script>
-</body>
-</html>
 ```
