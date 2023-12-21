@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>rrweb replay Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js"></script>
+
+</head>
+
+<body>
+    <script>
+        var url = "./demo.events.json"
+        fetch(url, {cache: "no-cache"}).then(response => {
+            return response.json();
+        }).then(data => {
+            new rrwebPlayer({
+                target: document.body,                
+                props: {
+                    events: data.events,
+                    autoPlay: true,
+                    UNSAFE_replayCanvas: true,
+                    width: 1780,
+                    height:800
+                },
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+
+    </script>
+</body>
+
+</html>
